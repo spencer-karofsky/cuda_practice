@@ -29,7 +29,6 @@ __global__ void vectorAddKernel(float* A_d, float* B_d, float* C_d, int n) {
 int main() {
     // Run vector_add.py
     system("python3 vector_add.py");
-    std::cout << "\n";
 
     srand(time(0));
 
