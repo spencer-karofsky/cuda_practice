@@ -12,7 +12,7 @@ def main():
 
     t0 = time.time()
     C = list(map(lambda a, b: a + b, A, B))
-    print(f'Python Vector Add Time: {(time.time() - t0) * 1000:.4f}ms')
+    print(f'Python Vector Add Time: {(time.time() - t0) * 1000:.4f} ms')
 
 if __name__ == '__main__':
     main()
