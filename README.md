@@ -29,6 +29,7 @@ Once your quota request is approved and you successfully launch your instance, t
 `ssh -i ~/path/to/your/key/pair/file.pem ec2-user@[your instance IPv4 address]`
 
 I used `scp` to put my local files in my EC2 instance.
+
 General `scp` Syntax: `scp -i ~/path/to/your/key/pair/file.pem ~/path/to/your/cuda/file.cu ec2-user@[EC2 Instance IPv4 address]:~/ `
 
 ### 1. Hello World
@@ -42,6 +43,19 @@ I created this demo to familiarize myself with CUDA.
 
 ### 2. Vector Add
 
+I created a CUDA program to test its speed on a parallelized task: adding two vectors.
+
+Vector addition is element-wise and each element's computation is independent, which makes vector addition very GPU-friendly; instead of a for-loop approach (slow for large vectors), we can create a thread for each element.
+
+To compare speed, I first wrote a simple for-loop program to add two random vectors in Python and C++ and lastly in CUDA – while timing everything. Using Python as the baseline, C++ was ~10x faster and CUDA was ~1000x faster.
+
+
+1. `scp -i ~/path/to/your/key/pair/file.pem ~/cuda_practice/vector_add/vector_add.cu ec2-user@[EC2 IPv4 address]:~/`
+2. `scp -i ~/path/to/your/key/pair/file.pem ~/cuda_practice/vector_add/vector_add.py ec2-user@[EC2 IPv4 address]:~/`
+3. `ssh -i ~/path/to/your/key/pair/file.pem ec2-user@[EC2 IPv4 address]`
+4. (Inside your EC2 Instance) `nvcc vector_add.cu -o vec_add`
+5. `./vec_add`
+6. Run `./vec_add` a second time and observe that the CUDA portion runs about twice as fast as the first runtime.
 
 ### 3. Image Processor
 
